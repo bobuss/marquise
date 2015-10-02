@@ -10,21 +10,38 @@
 <style>
 
 body {
-  background: #fff;
+  background: #FFF;
   color: #000;
   font-family: Helvetica, sans-serif;
 }
 
-h3{
-  text-align: center;
+p, q {
   font-size: 200%;
+}
+
+p.credit {
+  text-align: right;
+  text-decoration: underline;
+}
+
+q {
+  font-style: italic;
+}
+
+q::before { 
+  content: "«\00A0";
+}
+q::after {
+  content: '\00A0»';
 }
 
 </style>
 </head>
 <body role="document">
 
-  <h3>{{ marquise }}</h3>
+  <p>Ou bien :</p>
+  <q>{{ marquise }}</q>
+  <p class="credit">Le Bourgeois gentilhomme, II, 4.0-rc1</p>
 
 </body>
 </html>
