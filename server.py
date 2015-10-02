@@ -34,7 +34,7 @@ phrases = []
 app = Flask(__name__)
 
 
-def generate_all_phrases():
+def generate_all():
     global phrases
     for beautiful_eyes in ["beaux yeux", "yeux beaux"]:
 
@@ -45,11 +45,21 @@ def generate_all_phrases():
             "mourir",
             "d'amour"
         ]
-        for perm in permutations(words, len(words)):
-            phrase = ' '.join(perm)
-            phrases.append('{}.'.format(phrase))
 
-    phrases = map(lambda x: x[0].upper() + x[1:], phrases)
+        for perm in permutations(words, len(words)):
+            perm = list(perm)
+            belle_marquise_index = perm.index(words[0])
+            # belle Marquise does not start the sentence
+            if belle_marquise_index != 0:
+                perm[belle_marquise_index - 1] = perm[belle_marquise_index - 1] + ','
+
+            if belle_marquise_index != len(words) - 1:
+                perm[belle_marquise_index] = perm[belle_marquise_index] + ','
+
+            phrase = ' '.join(perm)
+            phrases.append(phrase + '.')
+
+    phrases = map(lambda p: p[0].upper() + p[1:], phrases)
 
 
 @app.route('/')
@@ -58,5 +68,5 @@ def root(name=None):
 
 
 if __name__ == '__main__':
-    generate_all_phrases()
+    generate_all()
     app.run(host='0.0.0.0', debug=True)
