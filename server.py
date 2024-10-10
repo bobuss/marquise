@@ -21,7 +21,6 @@ Ou bien :
 Le Bourgeois gentilhomme, II, 4
 
 """
-from __future__ import print_function
 from itertools import permutations
 from random import choice
 from flask import (
@@ -58,8 +57,8 @@ def generate_all():
 
             phrase = ' '.join(perm)
             phrases.append(phrase + '.')
-
-    phrases = map(lambda p: p[0].upper() + p[1:], phrases)
+    # uppercase the 1st
+    phrases = list(map(lambda p: p[0].upper() + p[1:], phrases))
 
 
 @app.route('/')
